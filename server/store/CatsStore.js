@@ -30,4 +30,18 @@ async function addCatsList(list) {
   }
 }
 
-module.exports = { initializeDB, removeDB, addCatsList };
+async function getCatsList(limit) {
+  try {
+    return await db
+      .collection('catsList')
+      .find()
+      .limit(limit)
+      .toArray();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+initializeDB();
+
+module.exports = { initializeDB, removeDB, addCatsList, getCatsList };

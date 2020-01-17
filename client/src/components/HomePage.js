@@ -15,8 +15,8 @@ export class HomePage extends Component {
     this.getCatsList();
   }
 
-  getCatsList = () => {
-    const catsList = fetchCatsList();
+  getCatsList = async () => {
+    const { data: catsList } = await fetchCatsList();
     console.log(catsList);
     this.setState({
       catsList,
@@ -56,6 +56,7 @@ export class HomePage extends Component {
               src={firstCatImage}
               alt="1st cat pic"
               style={{ width: '100%' }}
+              
             />
           </div>
           <div style={{ flex: '0 0 45%' }}>
