@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Header } from './Header';
 
-import { fetchCatsList } from '../services/CatsServices';
+import { fetchCatsList, sendMatchResults } from '../services/CatsServices';
 
 export class HomePage extends Component {
   state = {
@@ -17,24 +17,36 @@ export class HomePage extends Component {
 
   getCatsList = async () => {
     const { data: catsList } = await fetchCatsList();
-    console.log(catsList);
+    this.setState(
+      {
+        catsList,
+      },
+      this.getRandomCats
+    );
+  };
+
+  getRandomCats = () => {
+    const { catsList } = this.state;
     this.setState({
-      catsList,
-      firstCat: catsList[Math.floor(Math.random() * catsList.length)],
-      secondCat: catsList[Math.floor(Math.random() * catsList.length)],
+      firstCat: catsList[Math.floor(Math.random() * catsList.length - 1)],
+      secondCat: catsList[Math.floor(Math.random() * catsList.length - 1)],
     });
+  };
+
+  attributeResults = (winnerCatID, loserCatID) => {
+    sendMatchResults(winnerCatID, loserCatID);
   };
 
   render() {
     const {
       firstCat: {
-        id: firstCatID,
+        _id: firstCatID,
         image: firstCatImage,
         wonMatches: firstCatWonMatches,
         lostMatches: firstCatLostMatches,
       },
       secondCat: {
-        id: secondCattID,
+        _id: secondCatID,
         image: secondCatImage,
         wonMatches: secondCattWonMatches,
         lostMatches: secondCattLostMatches,
@@ -51,15 +63,20 @@ export class HomePage extends Component {
             justifyContent: 'space-between',
           }}
         >
-          <div style={{ flex: '0 0 45%' }}>
+          <div
+            style={{ flex: '0 0 45%' }}
+            onClick={this.attributeResults.bind(null, firstCatID, secondCatID)}
+          >
             <img
               src={firstCatImage}
               alt="1st cat pic"
               style={{ width: '100%' }}
-              
             />
           </div>
-          <div style={{ flex: '0 0 45%' }}>
+          <div
+            style={{ flex: '0 0 45%' }}
+            onClick={this.attributeResults.bind(null, secondCatID, firstCatID)}
+          >
             <img
               src={secondCatImage}
               alt="2nd cat pic"

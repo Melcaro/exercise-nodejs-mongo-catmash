@@ -42,6 +42,28 @@ async function getCatsList(limit) {
   }
 }
 
+async function setMatchScores(winnerCatID, loserCatID) {
+  try {
+    const setWinnerScore = await db
+      .collection('catsList')
+      .updateOne({ _id: ObjectID(winnerCatID) }, { $inc: { wonMatches: +1 } });
+    const setLoserScore = await db
+      .collection('catsList')
+      .updateOne({ _id: ObjectID(loserCatID) }, { $inc: { lostMatches: +1 } });
+
+    const result = { setWinnerScore, setLoserScore };
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 initializeDB();
 
-module.exports = { initializeDB, removeDB, addCatsList, getCatsList };
+module.exports = {
+  initializeDB,
+  removeDB,
+  addCatsList,
+  getCatsList,
+  setMatchScores,
+};
