@@ -35,22 +35,13 @@ export class HomePage extends Component {
 
   attributeResults = (winnerCatID, loserCatID) => {
     sendMatchResults(winnerCatID, loserCatID);
+    this.getRandomCats();
   };
 
   render() {
     const {
-      firstCat: {
-        _id: firstCatID,
-        image: firstCatImage,
-        wonMatches: firstCatWonMatches,
-        lostMatches: firstCatLostMatches,
-      },
-      secondCat: {
-        _id: secondCatID,
-        image: secondCatImage,
-        wonMatches: secondCattWonMatches,
-        lostMatches: secondCattLostMatches,
-      },
+      firstCat: { _id: firstCatID, image: firstCatImage },
+      secondCat: { _id: secondCatID, image: secondCatImage },
     } = this.state;
     return (
       <div>

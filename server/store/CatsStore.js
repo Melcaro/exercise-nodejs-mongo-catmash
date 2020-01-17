@@ -35,6 +35,7 @@ async function getCatsList(limit) {
     return await db
       .collection('catsList')
       .find()
+      .sort({ wonMatches: 1 })
       .limit(limit)
       .toArray();
   } catch (e) {
