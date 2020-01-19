@@ -7,3 +7,7 @@ export async function fetchCatsList() {
 export async function sendMatchResults(winnerCatID, loserCatID) {
   return await axios.post('/api/v1/scores', { winnerCatID, loserCatID });
 }
+
+export async function fetchScores() {
+  return await axios.get('/api/v1/scores');
+}

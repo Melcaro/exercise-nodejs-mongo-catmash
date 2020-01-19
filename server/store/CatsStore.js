@@ -59,6 +59,18 @@ async function setMatchScores(winnerCatID, loserCatID) {
   }
 }
 
+async function getScores() {
+  try {
+    return await db
+      .collection('catsList')
+      .find()
+      .sort({ wonMatches: -1 })
+      .toArray();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 initializeDB();
 
 module.exports = {
@@ -67,4 +79,5 @@ module.exports = {
   addCatsList,
   getCatsList,
   setMatchScores,
+  getScores,
 };

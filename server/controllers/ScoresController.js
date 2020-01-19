@@ -6,4 +6,9 @@ async function attributeScores(req, res) {
   return res.status(201).json(result);
 }
 
-module.exports = { attributeScores };
+async function fetchScores(req, res) {
+  const scores = await CatsStore.getScores();
+  res.json(scores);
+}
+
+module.exports = { attributeScores, fetchScores };

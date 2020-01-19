@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import { Header } from './Header';
+import { Link } from 'react-router-dom';
 
 import { fetchCatsList, sendMatchResults } from '../services/CatsServices';
 
@@ -45,7 +44,6 @@ export class HomePage extends Component {
     } = this.state;
     return (
       <div>
-        <Header />
         <div
           style={{
             height: '80vh',
@@ -75,7 +73,9 @@ export class HomePage extends Component {
             />
           </div>
         </div>
-        <div>Scores</div>
+        <Link to="/scores">
+          <div>Scores</div>
+        </Link>
       </div>
     );
   }
