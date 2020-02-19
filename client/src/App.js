@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+
+import { AppContainer } from './styles/AppStyle';
 
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
@@ -8,7 +9,7 @@ import { Scores } from './components/Scores';
 
 function App() {
   return (
-    <div className="App">
+    <AppContainer>
       <BrowserRouter>
         <div>
           <Route exact path="/" render={() => <Header />} />
@@ -16,7 +17,7 @@ function App() {
           <Route exact path="/scores" render={props => <Scores {...props} />} />
         </div>
       </BrowserRouter>
-    </div>
+    </AppContainer>
   );
 }
 

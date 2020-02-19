@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  HomePageContainer,
+  CatsContainer,
+  ImgContainer,
+  Img,
+} from '../styles/HomePageStyle';
+
 import { fetchCatsList, sendMatchResults } from '../services/CatsServices';
 
 export class HomePage extends Component {
@@ -43,40 +50,23 @@ export class HomePage extends Component {
       secondCat: { _id: secondCatID, image: secondCatImage },
     } = this.state;
     return (
-      <div>
-        <div
-          style={{
-            height: '80vh',
-            width: '90vw',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <div
-            style={{ flex: '0 0 45%' }}
+      <HomePageContainer>
+        <CatsContainer>
+          <ImgContainer
             onClick={this.attributeResults.bind(null, firstCatID, secondCatID)}
           >
-            <img
-              src={firstCatImage}
-              alt="1st cat pic"
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ flex: '0 0 45%' }}
+            <Img src={firstCatImage} alt="1st cat pic" />
+          </ImgContainer>
+          <ImgContainer
             onClick={this.attributeResults.bind(null, secondCatID, firstCatID)}
           >
-            <img
-              src={secondCatImage}
-              alt="2nd cat pic"
-              style={{ width: '100%' }}
-            />
-          </div>
-        </div>
+            <Img src={secondCatImage} alt="2nd cat pic" />
+          </ImgContainer>
+        </CatsContainer>
         <Link to="/scores">
           <div>Scores</div>
         </Link>
-      </div>
+      </HomePageContainer>
     );
   }
 }
