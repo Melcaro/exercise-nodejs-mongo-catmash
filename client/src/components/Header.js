@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { HeaderStyle } from '../styles/AppStyle';
+import { HeaderStyle, HeaderTitle, Rules } from '../styles/HeaderStyle';
 
 export const Header = () => {
   return (
     <HeaderStyle>
-      <h1>Cat Mash with Node and Mongo</h1>
-      <p>Choose the cat you prefer:</p>
+      <HeaderTitle>Cat Mash with Node and Mongo</HeaderTitle>
+      <Rules>Choose the cat you prefer:</Rules>
     </HeaderStyle>
   );
 };

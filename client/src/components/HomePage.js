@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 import {
   HomePageContainer,
-  CatsContainer,
   ImgContainer,
+  CatsContainer,
   Img,
+  ScoresLink,
 } from '../styles/HomePageStyle';
 
 import { fetchCatsList, sendMatchResults } from '../services/CatsServices';
@@ -63,9 +64,7 @@ export class HomePage extends Component {
             <Img src={secondCatImage} alt="2nd cat pic" />
           </ImgContainer>
         </CatsContainer>
-        <Link to="/scores">
-          <div>Scores</div>
-        </Link>
+        <ScoresLink to="/scores">See scores</ScoresLink>
       </HomePageContainer>
     );
   }

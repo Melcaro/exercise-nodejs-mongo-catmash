@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const auth = require('../services/auth');
 
-const url = 'mongodb://192.168.99.100:27018';
+const url = 'mongodb://localhost:27018';
 let db = null;
 
 async function initializeDB() {
@@ -18,7 +18,7 @@ async function removeDB() {
   try {
     return await db.dropDatabase();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -26,7 +26,7 @@ async function addCatsList(list) {
   try {
     return await db.collection('catsList').insertMany(list);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -39,7 +39,7 @@ async function getCatsList(limit) {
       .limit(limit)
       .toArray();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -55,7 +55,7 @@ async function setMatchScores(winnerCatID, loserCatID) {
     const result = { setWinnerScore, setLoserScore };
     return result;
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
@@ -67,7 +67,7 @@ async function getScores() {
       .sort({ wonMatches: -1 })
       .toArray();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
