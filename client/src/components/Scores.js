@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { fetchScores } from '../services/CatsServices';
+
+import {
+  ScoresContainer,
+  ScoresTitle,
+  HomePageLink,
+  ScoresTable,
+  TheadTable,
+  TitlesContainer,
+  CatTitle,
+  TableTitles,
+  Tbody,
+  BodyRow,
+  TDImg,
+  Img,
+  ScoresTD,
+} from '../styles/ScoresStyle';
 
 export class Scores extends Component {
   constructor(props) {
@@ -22,34 +37,30 @@ export class Scores extends Component {
     const { catsList } = this.state;
     console.log(this.props);
     return (
-      <div>
-        <h1>SCORES</h1>
-        <Link to="/">
-          <p>Go back to Home Page</p>
-        </Link>
-        <table>
-          <thead>
-            <tr>
-              <th>Cat</th>
-              <th>Matches won</th>
-              <th>Matches lost</th>
-            </tr>
-          </thead>
-          <tbody>
+      <ScoresContainer>
+        <ScoresTitle>SCORES</ScoresTitle>
+        <HomePageLink to="/">Go back to Home Page</HomePageLink>
+        <ScoresTable>
+          <TheadTable>
+            <TitlesContainer>
+              <CatTitle>Cat</CatTitle>
+              <TableTitles>Matches won</TableTitles>
+              <TableTitles>Matches lost</TableTitles>
+            </TitlesContainer>
+          </TheadTable>
+          <Tbody>
             {catsList.map(({ _id: catID, image, wonMatches, lostMatches }) => (
-              <tr key={catID}>
-                <td>
-                  <div>
-                    <img src={image} alt="cat pic" />
-                  </div>
-                </td>
-                <td>{wonMatches}</td>
-                <td>{lostMatches}</td>
-              </tr>
+              <BodyRow key={catID}>
+                <TDImg>
+                  <Img src={image} alt="cat pic" />
+                </TDImg>
+                <ScoresTD>{wonMatches}</ScoresTD>
+                <ScoresTD>{lostMatches}</ScoresTD>
+              </BodyRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </Tbody>
+        </ScoresTable>
+      </ScoresContainer>
     );
   }
 }
