@@ -33,9 +33,10 @@ export class HomePage extends Component {
 
   getRandomCats = () => {
     const { catsList } = this.state;
+    console.log('catsList', catsList);
     this.setState({
-      firstCat: catsList[Math.floor(Math.random() * catsList.length - 1)],
-      secondCat: catsList[Math.floor(Math.random() * catsList.length - 1)],
+      firstCat: catsList[Math.floor(Math.random() * catsList.length)],
+      secondCat: catsList[Math.floor(Math.random() * catsList.length)],
     });
   };
 
@@ -45,6 +46,8 @@ export class HomePage extends Component {
   };
 
   render() {
+    console.log('1st cat', this.state.firstCat);
+    console.log('2nd cat', this.state.secondCat);
     const {
       firstCat: { _id: firstCatID, image: firstCatImage },
       secondCat: { _id: secondCatID, image: secondCatImage },

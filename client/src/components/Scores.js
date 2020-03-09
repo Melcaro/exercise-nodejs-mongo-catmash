@@ -35,7 +35,6 @@ export class Scores extends Component {
   };
   render() {
     const { catsList } = this.state;
-    console.log(this.props);
     return (
       <ScoresContainer>
         <ScoresTitle>SCORES</ScoresTitle>
