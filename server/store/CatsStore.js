@@ -10,6 +10,7 @@ const url =
 let db = null;
 
 async function initializeDB() {
+  console.log('toto');
   const client = new MongoClient(url, { auth, useNewUrlParser: true });
   try {
     await client.connect();
