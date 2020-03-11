@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ScrollUpButton from 'react-scroll-up-button';
 
 import { fetchScores } from '../services/CatsServices';
 
@@ -37,6 +38,7 @@ export class Scores extends Component {
     const { catsList } = this.state;
     return (
       <ScoresContainer>
+        <ScrollUpButton />
         <ScoresTitle>SCORES</ScoresTitle>
         <HomePageLink to="/">Go back to Home Page</HomePageLink>
         <ScoresTable>

@@ -13,8 +13,7 @@ import { fetchCatsList, sendMatchResults } from '../services/CatsServices';
 export class HomePage extends Component {
   state = {
     catsList: [],
-    firstCat: '',
-    secondCat: '',
+    indexCounter: 0,
   };
 
   componentDidMount() {
@@ -22,36 +21,38 @@ export class HomePage extends Component {
   }
 
   getCatsList = async () => {
+    console.log('func called');
     const { data: catsList } = await fetchCatsList();
-    this.setState(
-      {
-        catsList,
-      },
-      this.getRandomCats
-    );
-  };
-
-  getRandomCats = () => {
-    const { catsList } = this.state;
-    console.log('catsList', catsList);
     this.setState({
-      firstCat: catsList[Math.floor(Math.random() * catsList.length)],
-      secondCat: catsList[Math.floor(Math.random() * catsList.length)],
+      catsList,
+      indexCounter: 0,
     });
   };
 
   attributeResults = (winnerCatID, loserCatID) => {
     sendMatchResults(winnerCatID, loserCatID);
-    this.getRandomCats();
+    this.setState(prevState => ({
+      indexCounter: prevState.indexCounter + 2,
+    }));
+    if (this.state.indexCounter > 5) {
+      this.getCatsList();
+      this.setState({ indexCounter: 0 });
+    }
   };
 
   render() {
-    console.log('1st cat', this.state.firstCat);
-    console.log('2nd cat', this.state.secondCat);
-    const {
-      firstCat: { _id: firstCatID, image: firstCatImage },
-      secondCat: { _id: secondCatID, image: secondCatImage },
-    } = this.state;
+    const { indexCounter, catsList } = this.state;
+    const loader = catsList.length === 0 && <div>LOADING</div>;
+
+    if (loader) {
+      return loader;
+    }
+
+    const { _id: firstCatID, image: firstCatImage } = catsList[indexCounter];
+    const { _id: secondCatID, image: secondCatImage } = catsList[
+      indexCounter + 1
+    ];
+
     return (
       <HomePageContainer>
         <CatsContainer>
