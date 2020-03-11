@@ -1,17 +1,22 @@
+require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const auth = require('../services/auth');
 
-const url = 'mongodb://localhost:27018';
+const url =
+  process.env.NODE_ENV === 'production'
+    ? `mongodb+srv://cluster0-t2iuq.mongodb.net/test?retryWrites=true&w=majority`
+    : 'mongodb://localhost:27018';
 let db = null;
 
 async function initializeDB() {
-  const client = await MongoClient.connect(url, {
-    auth,
-    poolSize: 10,
-    useNewUrlParser: true,
-  });
-  db = client.db('cats');
+  const client = new MongoClient(url, { auth, useNewUrlParser: true });
+  try {
+    await client.connect();
+    db = client.db('cats');
+  } catch (err) {
+    console.log(err.stack);
+  }
 }
 
 async function removeDB() {

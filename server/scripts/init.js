@@ -1,3 +1,4 @@
+require('dotenv').config();
 const CatsStore = require('../store/CatsStore');
 const cats = require('./cats.json');
 

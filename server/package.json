@@ -8,5 +8,8 @@
     "startMongo": "docker container rm -f mongo-cats-mash;docker container run -p 27018:27017 -d -v dataMongo:/data/db -e MONGO_INITDB_ROOT_USERNAME=melcaro -e MONGO_INITDB_ROOT_PASSWORD=1234 --name mongo-cats-mash mongo:latest",
     "initDB": "node ./scripts/init.js",
     "start:dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
