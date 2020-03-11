@@ -21,7 +21,6 @@ export class HomePage extends Component {
   }
 
   getCatsList = async () => {
-    console.log('func called');
     const { data: catsList } = await fetchCatsList();
     this.setState({
       catsList,
